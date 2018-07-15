@@ -120,7 +120,32 @@ class Player {
     console.log(this.getPack());
   }
 
-  takeItem(){
+  takeItem(item){
+    // console.log("player name: " + this.name);
+    // console.log("item name: " + item.name);
+    if(this.getPack().length !== 3){
+      this.getPack().push(item);
+      console.log(this.name + " " + item.name);
+      return true;
+    }
+    else{
+      console.log("The pack is full. Item could not be stored.");
+      return false;
+    }
+  }
+
+  discardItem(item){
+    if(!this.getPack().indexOf(item)){
+      console.log("Nothing was discarded. " + item.name + " could not be found.");
+      return false;
+    }
+    else{
+      console.log(this.name + " " + item.name + " was discarded.");
+      let itemIndex = this.getPack().indexOf(item);
+      this.getPack().splice(itemIndex, 1);
+      
+      return true;
+    }
 
   }
 }
@@ -157,6 +182,7 @@ class Player {
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
 
+ //done
 
 /**
  * Player Class Method => discardItem(item)
@@ -184,6 +210,7 @@ class Player {
  * @return {boolean} true/false     Whether player was able to remove item from pack.
  */
 
+ //done
 
 /**
  * Player Class Method => equip(itemToEquip)
