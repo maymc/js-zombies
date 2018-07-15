@@ -115,6 +115,14 @@ class Player {
   getMaxHealth() {
     return this._maxHealth;
   }
+
+  checkPack() {
+    console.log(this.getPack());
+  }
+
+  takeItem(){
+
+  }
 }
 
 /**
@@ -129,10 +137,7 @@ class Player {
  * @name checkPack
  */
 
-//  checkPack(){
-
-//  }
-
+//done
 
 /**
  * Player Class Method => takeItem(item)
