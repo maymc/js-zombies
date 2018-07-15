@@ -401,17 +401,18 @@ class Zombie {
  * @param {number} speed            The zombie's speed.
  */
 
- class FastZombie extends Zombie{
-   constructor(health, strength, speed){
-    super(health, strength, speed);
-   }
- }
+
 
 /**
  * FastZombie Extends Zombie Class
  * -----------------------------
  */
 
+class FastZombie extends Zombie{
+  constructor(health, strength, speed){
+   super(health, strength, speed);
+  }
+}
 
 
 /**
@@ -435,7 +436,11 @@ class Zombie {
  * -----------------------------
  */
 
-
+class StrongZombie extends Zombie{
+  constructor(health, strength, speed){
+   super(health, strength, speed);
+  }
+}
 
 /**
  * Class => RangedZombie(health, strength, speed)
@@ -458,7 +463,11 @@ class Zombie {
  * -----------------------------
  */
 
-
+class RangedZombie extends Zombie{
+  constructor(health, strength, speed){
+    super(health, strength, speed);
+  }
+}
 
 /**
  * Class => ExplodingZombie(health, strength, speed)
@@ -480,9 +489,11 @@ class Zombie {
  * ExplodingZombie Extends Zombie Class
  * -----------------------------
  */
-
-
-
+class ExplodingZombie extends Zombie{
+  constructor(health, strength, speed){
+    super(health, strength, speed);
+  }
+}
 
 /**
  * Sample run.
