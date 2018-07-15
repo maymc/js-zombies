@@ -31,13 +31,6 @@ class Item {
  * @property {number} damage
  */
 
-//  class Weapon {
-//    constructor(name, damage){
-//     //  this.name = name;
-//      this.damage = damage;
-//    }
-//  }
-
 /**
  * Weapon Extends Item Class
  * -----------------------------
@@ -49,7 +42,6 @@ class Item {
      this.damage = damage;
    }
  }
-
 
 /**
  * Class => Food(name, energy)
@@ -67,13 +59,17 @@ class Item {
  * @property {number} energy
  */
 
-
 /**
  * Food Extends Item Class
  * -----------------------------
  */
 
-
+ class Food extends Item {
+   constructor(name, energy){
+     super(name);
+     this.energy = energy;
+   }
+ }
 
 /**
  * Class => Player(name, health, strength, speed)
@@ -97,6 +93,29 @@ class Item {
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
+class Player {
+  constructor(name, health, strength, speed){
+    //Public Properties
+    this.name = name;
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this.isAlive = true;
+    this.equipped = false;
+
+    //Private Properties
+    this._pack = [];
+    this._maxHealth = health;
+  }
+
+  getPack() {
+    return this._pack;
+  }
+
+  getMaxHealth() {
+    return this._maxHealth;
+  }
+}
 
 /**
  * Player Class Method => checkPack()
@@ -109,6 +128,10 @@ class Item {
  *
  * @name checkPack
  */
+
+//  checkPack(){
+
+//  }
 
 
 /**
