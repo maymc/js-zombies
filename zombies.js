@@ -306,6 +306,7 @@ class Player {
  * @param {Weapon} itemToEquip  The weapon item to equip.
  */
 
+ //done
 
 /**
  * Player Class Method => eat(itemToEat)
@@ -326,6 +327,7 @@ class Player {
  * @param {Food} itemToEat  The food item to eat.
  */
 
+ //done
 
 /**
  * Player Class Method => useItem(item)
@@ -340,6 +342,7 @@ class Player {
  * @param {Item/Weapon/Food} item   The item to use.
  */
 
+//done
 
 /**
  * Player Class Method => equippedWith()
@@ -355,6 +358,7 @@ class Player {
  * @return {string/boolean}   Weapon name or false if nothing is equipped.
  */
 
+ //done
 
 /**
  * Class => Zombie(health, strength, speed)
@@ -372,6 +376,15 @@ class Player {
  * @property {boolean} isAlive      Default value should be `true`.
  */
 
+class Zombie {
+  constructor(health, strength, speed){
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this._maxHealth = health;
+    this.isAlive = true;
+  }
+}
 
 /**
  * Class => FastZombie(health, strength, speed)
@@ -388,6 +401,11 @@ class Player {
  * @param {number} speed            The zombie's speed.
  */
 
+ class FastZombie extends Zombie{
+   constructor(health, strength, speed){
+    super(health, strength, speed);
+   }
+ }
 
 /**
  * FastZombie Extends Zombie Class
