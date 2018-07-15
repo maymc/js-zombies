@@ -135,19 +135,93 @@ class Player {
   }
 
   discardItem(item){
-    if(!this.getPack().indexOf(item)){
+    if(this._pack.indexOf(item) === -1){
       console.log("Nothing was discarded. " + item.name + " could not be found.");
       return false;
     }
     else{
       console.log(this.name + " " + item.name + " was discarded.");
-      let itemIndex = this.getPack().indexOf(item);
-      this.getPack().splice(itemIndex, 1);
+      let itemIndex = this._pack.indexOf(item);
+      this._pack.splice(itemIndex, 1);
       
       return true;
     }
+  }
+
+  equip(itemToEquip){
+    console.log(itemToEquip);
+
+    if(itemToEquip instanceof Weapon){
+      //If player has weapon equipped
+      if(this.equipped){
+        let itemToEquipIndex = this.getPack().indexOf(itemToEquip);
+        
+        //If in the pack
+        if(itemToEquipIndex >= 0){
+          this.getPack().splice(itemToEquipIndex, 1, this.equipped);
+          this.equipped = itemToEquip;
+        }
+        //Else not in the pack
+        else{
+          console.log("itemToEquip is not in your pack.");
+        }
+      }
+      //Else, player not equipped
+      else if(!this.equipped){
+        let itemToEquipIndex = this.getPack().indexOf(itemToEquip);
+        if(itemToEquipIndex >= 0){
+          this.getPack().splice(itemToEquipIndex, 1);
+          this.equipped = itemToEquip;
+        }
+      }
+    }
+    else{
+      console.log("This is not a weapon.");
+    }
 
   }
+
+  eat(itemToEat){
+    console.log(itemToEat);
+    console.log(itemToEat.energy);
+
+    if(itemToEat instanceof Food){
+      let itemToEatIndex = this.getPack().indexOf(itemToEat);
+      if(itemToEatIndex >= 0){
+        this.getPack().splice(itemToEatIndex,1);
+        this.health += itemToEat.energy;
+
+        if(this.health > this._maxHealth){
+          this.health = this._maxHealth;
+        }
+      }
+    }
+  }
+
+  useItem(item){
+    let itemIndex = this.getPack().indexOf(item);
+    if(itemIndex >= 0){
+      if(item instanceof Weapon){
+        this.equip(item);
+      }
+      else if(item instanceof Food){
+        this.eat(item);
+      }
+    }
+  }
+
+  equippedWith(){
+    if(this.equipped instanceof Weapon){
+      console.log(this.name + " " + this.equipped);
+      return this.equipped.name;
+    }
+    else{
+      console.log("Nothing equipped");
+      return false;
+    }
+
+  }
+
 }
 
 /**
