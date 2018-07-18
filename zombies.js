@@ -8,6 +8,15 @@
  * @property {string} name
  */
 
+//  class Item {
+//    constructor(name){
+//      this.name = name;
+//    }
+//  }
+
+function Item(name){
+  this.name = name;
+}
 
 /**
  * Class => Weapon(name, damage)
@@ -31,6 +40,20 @@
  * -----------------------------
  */
 
+// class Weapon extends Item{
+//   constructor(name, damage){
+//     super(name);
+//     this.damage = damage;
+//   }
+// }
+
+function Weapon(name, damage){
+  Item.call(this, name);
+  this.damage = damage;
+}
+
+Weapon.prototype = Object.create(Item.prototype);
+//Weapon.prototype.constructor = Weapon;
 
 
 /**
@@ -55,6 +78,12 @@
  * -----------------------------
  */
 
+ function Food(name, energy){
+   Item.call(this, name);
+   this.energy = energy;
+ }
+
+ Food.prototype = Object.create(Item.prototype);
 
 
 /**
@@ -67,18 +96,41 @@
  * @param {number} health                  The player's health.
  * @param {number} strength                The player's strength.
  * @param {number} speed                   The player's speed.
+ * 
  * @private {array} pack                   Default value should be empty.
  * @private {number} maxHealth             Default value should be set to `health`.
+ * 
  * @property {string} name
  * @property {number} health
  * @property {number} strength
  * @property {number} speed
  * @property {boolean} isAlive             Default value should be `true`.
  * @property {Weapon/boolean} equipped     Default value should be `false`.
+ * 
  * @property {method} getPack              Returns private variable `pack`.
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
+ function Player(name, health, strength, speed){
+   this.name = name;
+   this.health = health;
+   this.strength = strength;
+   this.speed = speed;
+   this.isAlive = true;
+   this.equipped = false;
+
+   this._pack = [];
+   this._maxHealth = health;
+ }
+
+ Player.prototype.getPack = function(){
+   return this._pack;
+ }
+
+ Player.prototype.getMaxHealth = function(){
+   return this._maxHealth;
+ }
+ 
 
 /**
  * Player Class Method => checkPack()
