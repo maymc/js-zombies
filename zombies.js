@@ -157,7 +157,35 @@ Weapon.prototype = Object.create(Item.prototype);
      console.log(this.name + ", " + item.name + " was discarded.");
      return true;
    }
+ }
 
+ Player.prototype.equip = function(itemToEquip){
+   //Player can only equip a weapon
+   if(itemToEquip instanceof Weapon){
+     let itemToEquipIndex = this.getPack().indexOf(itemToEquip);
+     
+     //If the itemToEquip exists in the pack and the player is equipped, the player can swap weapons
+     if(itemToEquipIndex >= 0){
+       //If player is equipped
+       if(this.equipped){
+         this.getPack().splice(itemToEquipIndex, 1, this.equipped);
+         this.equipped = itemToEquip;
+       }
+       //Player is not equipped
+       else{
+         this.getPack().splice(itemToEquipIndex, 1);
+         this.equipped = itemToEquip;
+       }
+     }
+     //Else itemToEquip doesn't exist in pack
+     else{
+       console.log("Item to equip is not in pack");
+     }
+   }
+   //Else itemToEquip is not a Weapon
+   else{
+     console.log("This is not a weapon");
+   }
  }
 
 /**
