@@ -430,6 +430,11 @@ Player.prototype.equippedWith = function(){
  * -----------------------------
  */
 
+ function StrongZombie(health, strength, speed){
+   Zombie.call(this, health, strength, speed);
+ }
+
+ StrongZombie.prototype = Object.create(Zombie.prototype);
 
 
 /**
