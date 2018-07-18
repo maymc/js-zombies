@@ -131,6 +131,9 @@ Weapon.prototype = Object.create(Item.prototype);
    return this._maxHealth;
  }
  
+ Player.prototype.checkPack = function(){
+   console.log(this.getPack);
+ }
 
 /**
  * Player Class Method => checkPack()
