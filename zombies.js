@@ -188,6 +188,28 @@ Weapon.prototype = Object.create(Item.prototype);
    }
  }
 
+ Player.prototype.eat = function(itemToEat){
+   //Check if itemToEat is a Food
+   if(itemToEat instanceof Food){
+     let itemToEatIndex = this.getPack().indexOf(itemToEat);
+
+     if(itemToEatIndex >= 0){
+       this.getPack().splice(itemToEatIndex, 1);
+       this.health += itemToEat.energy;
+       if(this.health > this.getMaxHealth()){
+         this.health = this.getMaxHealth();
+       }
+     }
+     else{
+       console.log("Item to eat is not in pack.");
+     }
+   }
+   //itemToEat is not a food
+   else{
+     console.log("Item to eat is not a food");
+   }
+ }
+
 /**
  * Player Class Method => checkPack()
  * -----------------------------
