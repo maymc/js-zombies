@@ -132,7 +132,32 @@ Weapon.prototype = Object.create(Item.prototype);
  }
  
  Player.prototype.checkPack = function(){
-   console.log(this.getPack);
+   console.log(this.getPack());
+ }
+
+ Player.prototype.takeItem = function(item){
+   if(this.getPack().length !== 3){
+     this.getPack().push(item);
+     console.log(this.name + ", " + item.name);
+     return true;
+   }
+   else{
+     console.log("Pack is full. Item could not be stored.");
+     return false;
+   }
+ }
+
+ Player.prototype.discardItem = function(item){
+   let itemIndex = this.getPack().indexOf(item);
+   if(itemIndex < 0){
+     return console.log("Nothing discarded. Item was not found.");
+   }
+   else{
+     this.getPack().splice(itemIndex, 1);
+     console.log(this.name + ", " + item.name + " was discarded.");
+     return true;
+   }
+
  }
 
 /**
