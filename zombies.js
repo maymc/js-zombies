@@ -402,6 +402,11 @@ Player.prototype.equippedWith = function(){
  * -----------------------------
  */
 
+ function FastZombie(health, strength, speed){
+   Zombie.call(this, health, strength, speed);
+ }
+
+ FastZombie.prototype = Object.create(Zombie.prototype);
 
 
 /**
