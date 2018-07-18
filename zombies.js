@@ -130,110 +130,6 @@ Weapon.prototype = Object.create(Item.prototype);
  Player.prototype.getMaxHealth = function(){
    return this._maxHealth;
  }
- 
- Player.prototype.checkPack = function(){
-   console.log(this.getPack());
- }
-
- Player.prototype.takeItem = function(item){
-   if(this.getPack().length !== 3){
-     this.getPack().push(item);
-     console.log(this.name + ", " + item.name);
-     return true;
-   }
-   else{
-     console.log("Pack is full. Item could not be stored.");
-     return false;
-   }
- }
-
- Player.prototype.discardItem = function(item){
-   let itemIndex = this.getPack().indexOf(item);
-   if(itemIndex < 0){
-     return console.log("Nothing discarded. Item was not found.");
-   }
-   else{
-     this.getPack().splice(itemIndex, 1);
-     console.log(this.name + ", " + item.name + " was discarded.");
-     return true;
-   }
- }
-
- Player.prototype.equip = function(itemToEquip){
-   //Player can only equip a weapon
-   if(itemToEquip instanceof Weapon){
-     let itemToEquipIndex = this.getPack().indexOf(itemToEquip);
-     
-     //If the itemToEquip exists in the pack and the player is equipped, the player can swap weapons
-     if(itemToEquipIndex >= 0){
-       //If player is equipped
-       if(this.equipped){
-         this.getPack().splice(itemToEquipIndex, 1, this.equipped);
-         this.equipped = itemToEquip;
-       }
-       //Player is not equipped
-       else{
-         this.getPack().splice(itemToEquipIndex, 1);
-         this.equipped = itemToEquip;
-       }
-     }
-     //Else itemToEquip doesn't exist in pack
-     else{
-       console.log("Item to equip is not in pack");
-     }
-   }
-   //Else itemToEquip is not a Weapon
-   else{
-     console.log("This is not a weapon");
-   }
- }
-
- Player.prototype.eat = function(itemToEat){
-   //Check if itemToEat is a Food
-   if(itemToEat instanceof Food){
-     let itemToEatIndex = this.getPack().indexOf(itemToEat);
-
-     if(itemToEatIndex >= 0){
-       this.getPack().splice(itemToEatIndex, 1);
-       this.health += itemToEat.energy;
-       if(this.health > this.getMaxHealth()){
-         this.health = this.getMaxHealth();
-       }
-     }
-     else{
-       console.log("Item to eat is not in pack.");
-     }
-   }
-   //itemToEat is not a food
-   else{
-     console.log("Item to eat is not a food");
-   }
- }
-
-Player.prototype.useItem = function(item){
-  let itemIndex = this.getPack().indexOf(item);
-
-  if(itemIndex >= 0){
-    if(item instanceof Weapon){
-      this.equip(item);
-    }
-    else if(item instanceof Food){
-      this.eat(item);
-    }
-  }
-}
-
-Player.prototype.equippedWith = function(){
-  if(this.equipped instanceof Weapon){
-      console.log(this.name + " " + this.equipped.name);
-      return this.equipped.name;
-  }
-  else{
-    console.log("Nothing equipped.");
-    return false;
-  }
-}
-
 
 /**
  * Player Class Method => checkPack()
@@ -247,6 +143,9 @@ Player.prototype.equippedWith = function(){
  * @name checkPack
  */
 
+Player.prototype.checkPack = function(){
+  console.log(this.getPack());
+}
 
 /**
  * Player Class Method => takeItem(item)
@@ -266,6 +165,17 @@ Player.prototype.equippedWith = function(){
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
 
+Player.prototype.takeItem = function(item){
+  if(this.getPack().length !== 3){
+    this.getPack().push(item);
+    console.log(this.name + ", " + item.name);
+    return true;
+  }
+  else{
+    console.log("Pack is full. Item could not be stored.");
+    return false;
+  }
+}
 
 /**
  * Player Class Method => discardItem(item)
@@ -293,6 +203,17 @@ Player.prototype.equippedWith = function(){
  * @return {boolean} true/false     Whether player was able to remove item from pack.
  */
 
+Player.prototype.discardItem = function(item){
+  let itemIndex = this.getPack().indexOf(item);
+  if(itemIndex < 0){
+    return console.log("Nothing discarded. Item was not found.");
+  }
+  else{
+    this.getPack().splice(itemIndex, 1);
+    console.log(this.name + ", " + item.name + " was discarded.");
+    return true;
+  }
+}
 
 /**
  * Player Class Method => equip(itemToEquip)
@@ -314,6 +235,34 @@ Player.prototype.equippedWith = function(){
  * @param {Weapon} itemToEquip  The weapon item to equip.
  */
 
+Player.prototype.equip = function(itemToEquip){
+  //Player can only equip a weapon
+  if(itemToEquip instanceof Weapon){
+    let itemToEquipIndex = this.getPack().indexOf(itemToEquip);
+    
+    //If the itemToEquip exists in the pack and the player is equipped, the player can swap weapons
+    if(itemToEquipIndex >= 0){
+      //If player is equipped
+      if(this.equipped){
+        this.getPack().splice(itemToEquipIndex, 1, this.equipped);
+        this.equipped = itemToEquip;
+      }
+      //Player is not equipped
+      else{
+        this.getPack().splice(itemToEquipIndex, 1);
+        this.equipped = itemToEquip;
+      }
+    }
+    //Else itemToEquip doesn't exist in pack
+    else{
+      console.log("Item to equip is not in pack");
+    }
+  }
+  //Else itemToEquip is not a Weapon
+  else{
+    console.log("This is not a weapon");
+  }
+}
 
 /**
  * Player Class Method => eat(itemToEat)
@@ -334,6 +283,27 @@ Player.prototype.equippedWith = function(){
  * @param {Food} itemToEat  The food item to eat.
  */
 
+Player.prototype.eat = function(itemToEat){
+  //Check if itemToEat is a Food
+  if(itemToEat instanceof Food){
+    let itemToEatIndex = this.getPack().indexOf(itemToEat);
+
+    if(itemToEatIndex >= 0){
+      this.getPack().splice(itemToEatIndex, 1);
+      this.health += itemToEat.energy;
+      if(this.health > this.getMaxHealth()){
+        this.health = this.getMaxHealth();
+      }
+    }
+    else{
+      console.log("Item to eat is not in pack.");
+    }
+  }
+  //itemToEat is not a food
+  else{
+    console.log("Item to eat is not a food");
+  }
+}
 
 /**
  * Player Class Method => useItem(item)
@@ -348,6 +318,18 @@ Player.prototype.equippedWith = function(){
  * @param {Item/Weapon/Food} item   The item to use.
  */
 
+Player.prototype.useItem = function(item){
+  let itemIndex = this.getPack().indexOf(item);
+
+  if(itemIndex >= 0){
+    if(item instanceof Weapon){
+      this.equip(item);
+    }
+    else if(item instanceof Food){
+      this.eat(item);
+    }
+  }
+}
 
 /**
  * Player Class Method => equippedWith()
@@ -363,6 +345,16 @@ Player.prototype.equippedWith = function(){
  * @return {string/boolean}   Weapon name or false if nothing is equipped.
  */
 
+Player.prototype.equippedWith = function(){
+  if(this.equipped instanceof Weapon){
+      console.log(this.name + " " + this.equipped.name);
+      return this.equipped.name;
+  }
+  else{
+    console.log("Nothing equipped.");
+    return false;
+  }
+}
 
 /**
  * Class => Zombie(health, strength, speed)
