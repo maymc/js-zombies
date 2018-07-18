@@ -486,7 +486,11 @@ Player.prototype.equippedWith = function(){
  * -----------------------------
  */
 
+function ExplodingZombie(health, strength, speed){
+  Zombie.call(this, health, strength, speed);
+}
 
+ExplodingZombie.prototype = Object.create(Zombie.prototype);
 
 
 /**
