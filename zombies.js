@@ -210,6 +210,20 @@ Weapon.prototype = Object.create(Item.prototype);
    }
  }
 
+Player.prototype.useItem = function(item){
+  let itemIndex = this.getPack().indexOf(item);
+
+  if(itemIndex >= 0){
+    if(item instanceof Weapon){
+      this.equip(item);
+    }
+    else if(item instanceof Food){
+      this.eat(item);
+    }
+  }
+}
+
+
 /**
  * Player Class Method => checkPack()
  * -----------------------------
