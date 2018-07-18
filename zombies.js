@@ -223,6 +223,17 @@ Player.prototype.useItem = function(item){
   }
 }
 
+Player.prototype.equippedWith = function(){
+  if(this.equipped instanceof Weapon){
+      console.log(this.name + " " + this.equipped.name);
+      return this.equipped.name;
+  }
+  else{
+    console.log("Nothing equipped.");
+    return false;
+  }
+}
+
 
 /**
  * Player Class Method => checkPack()
